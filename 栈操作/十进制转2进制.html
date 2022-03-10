@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+     function Stack(){}
+     function dec2bin(decNumber){
+//    1.定义一个栈对象
+    var stack = new Stack();
+
+    //2.循环操作
+    while(decNumber > 0){
+        // 2.1获取余数,并且放入得栈中
+        stack.push(decNumber % 2)
+        // 2.2.获取整除后的结果，作为下一次运行的数字
+        decNumber = Math.floor(decNumber / 2)
+    }
+
+    //3.从栈中取出0和1
+    var binaryString = ""
+    while(!stack.isEmpty()){
+        binaryString += stack.pop()
+    }
+    return binaryString;
+}
+// 测试
+alert(dec2bin(100));
+alert(dec2bin(10));
+alert(dec2bin(1000));
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

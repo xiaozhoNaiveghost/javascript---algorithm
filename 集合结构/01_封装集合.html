@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    //封装集合
+    function Set() {
+      //属性
+      this.items = {}
+      //方法
+      //add方法
+      Set.prototype.add = function (value) {
+        //判断当前集合中是否已经包含了该元素
+        if (this.has(value)) {
+          return false
+        }
+
+        //将元素加入到集合中
+        this.items[value] = value
+        return true
+      }
+      //has方法 判断当前里面是否有该元素
+      Set.prototype.has = function (value) {
+        return this.items.hasOwnProperty(value)
+      }
+
+      //remove方法 根据元素删除当前的元素
+      Set.prototype.remove = function (value) {
+        //1.判断该集合中是否包含该元素
+        if (!this.has(value)) {
+          return false
+        }
+        //2.将该元素从属性中删除
+        delete this.items[value]
+        return true
+      }
+
+      //clear 方法 移除集合中的所有项
+      Set.prototype.clear = function () {
+        this.items = {}
+      }
+
+      //size方法 返回当前集合里面的个数
+      Set.prototype.size = function () {
+        return Object.keys(this.items).length
+      }
+
+      //valuse 获取集合中所有的值
+      Set.prototype.values = function () {
+        return Object.keys(this.items)
+      }
+
+      //集合间的操作
+      //1.并集union
+      Set.prototype.union = function (otherSer) {
+        // this: 集合对象A
+        // otherSer:集合对象B
+        //1.创建新的集合
+        var unionSet = new Set()
+        //2.将A集合中所有的颜色添加到新集合中
+        var values = this.values()
+        for (let i = 0; i < values.length; i++) {
+          unionSet.add(values[i])
+        }
+        values = otherSer.values()
+        for (let i = 0; i < values.length; i++) {
+          unionSet.add(values[i])
+        }
+        return unionSet
+      }
+      // 2.交集 intersection
+      Set.prototype.intersection = function (otherSer) {
+        //this:集合A
+        //otherSet: 集合B
+        //1.创建新的集合
+        var intersectionSet = new Set()
+
+        //2.从A中取出一个个元素，判断是否同时存中于集合B中，存中则放入新的集合中
+        var values = this.values()
+        for (let i = 0; i < values.length; i++) {
+          var item = values[i]
+          if (otherSer.has(item)) {
+            intersectionSet.add(item)
+          }
+        }
+        return intersectionSet
+      }
+
+      //差集
+      Set.prototype.difference = function (otherSer) {
+        //this:集合A
+        //otherSer:集合B
+        //1.创建新的集合
+        var difference = new Set()
+        //2.取出A集合一个个元素，判断是否同时存中于B中，不存在于B中就添加到新的集合
+        var values = this.values()
+        for (let i = 0; i < values.length; i++) {
+          var item = values[i]
+          if (!otherSer.has(item)) {
+            difference.add(item)
+          }
+        }
+        return difference
+      }
+
+      //子集
+      Set.prototype.subset = function (otherSer) {
+        //this:集合A
+        //otherSer:集合B
+        //遍历集合A中所有的元素，如果发现，集合A中的元素，在集合B中不存在则返回false
+        //如果遍历完了整个集合，依然没有返回flase，那么返回tryue即可
+        var values = this.values()
+        for (let i = 0; i < values.length; i++) {
+          var item = values[i]
+          if (otherSer.has(item)) {
+            return false
+          }
+        }
+        return true
+      }
+    }
+    //测试Set类
+    // 1.常见Set类的东西
+    // var set = new Set()
+
+    // //2.添加元素
+    // alert(set.add('abc'))
+    // alert(set.add('abc'))
+    // alert(set.add('cba'))
+    // alert(set.add('nba'))
+    // alert(set.add('mba'))
+    // alert(set.values())
+
+    //3.删除元素
+    // alert(set.remove('mba'))
+    // alert(set.remove('mba'))
+    // alert(set.values())
+
+    // //4.测试has方法
+    // alert(set.has('abc'))
+
+    // //5.获取元素的个数
+    // alert(set.size())
+    // set.clear()
+    // alert(set.size())
+
+    //1.创建两个集合 并且添加元素
+    var setA = new Set()
+    setA.add('abc')
+    setA.add('cba')
+    setA.add('nba')
+    var setB = new Set()
+    setB.add('aaa')
+    setB.add('nba')
+    setB.add('cba')
+    //2.求两个集合的并集
+    unionSet = setA.union(setB)
+    alert(unionSet.values())
+
+    //3.求交集
+    var intersectionSet = setA.intersection(setB)
+    alert(intersectionSet.values())
+
+    // 4.求两个的集合的差集
+    var differenceSet = setA.difference(setB)
+    alert(differenceSet.values())
+
+    //5.判断子集
+    alert(setA.subset(setB))
+  </script>
+</body>
+
+</html>

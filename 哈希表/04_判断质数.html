@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <!-- //封装函数判断质数 -->
+  <script>
+    function isPrime(num) {
+      //1.获取我们的num的平方根
+      var temp = parseInt(Math.sqrt(num))
+      //2.循环判断
+      for (let i = 2; i <= temp; i++) {
+        if (num % i == 0) {
+          return false //为flase 则不是质数
+        }
+      }
+      return true //是质数
+    }
+    alert(isPrime(21))
+    alert(isPrime(5))
+    alert(isPrime(24))
+    alert(isPrime(15))
+    alert(isPrime(3))
+  </script>
+</body>
+
+</html>
