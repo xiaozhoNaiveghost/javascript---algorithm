@@ -24,18 +24,18 @@
       //   }
       // }
       // return arr
-      // 解法2 
-      // target - nums[i] = num 然后用 num 对原数组对比
-      let n = nums.length, arr = new Array(), s = new Array()
-      for (let i = 0; i < n; i++) {
-        let num = target - nums[i] //7
-        for (let j = i; j < n; j++) {
-          if (num == nums[j + 1]) {
-            arr.push(i, j + 1)
-            return arr
-          }
+      // 解法2  map.set map.has
+      const map = new Map()
+      for (let i = 0; i < nums.length; i++) {
+        const item = target - nums[i]
+        if (map.has(item)) {
+          // console.log(map);
+          return [map.get(item), i]
+        } else {
+          map.set(nums[i], i)
         }
-      };
+      }
+      return []
     }
     console.log(twoSum([2, 7, 8, 11, 15], 9));
   </script>
