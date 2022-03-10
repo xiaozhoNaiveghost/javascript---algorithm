@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    // function intersect(nums1, nums2) {
+    // map方法
+    // let map = new Map
+    // for (let i = 0; i < nums1.length; i++) {
+    //   const val = map.get(nums1[i])
+    //   if (!val) {
+    //     map.set(nums1[i], 1)
+    //   } else {
+    //     map.set(nums1[i], val + 1)
+    //   }
+    // }
+    // let arr = new Array
+    // for (let i = 0; i < nums2.length; i++) {
+    //   const n = map.get(nums2[i])
+    //   if (n) {
+    //     arr.push(nums2[i])
+    //     map.set(nums2[i], n - 1)
+    //   }
+    // }
+    // return arr
+    // }
+    // 双指针 加 排序
+    let intersect = function (nums1, nums2) {
+      nums1.sort((a, b) => a - b);
+      nums2.sort((a, b) => a - b);
+      let l = 0, r = 0, ans = [];
+      while (l < nums1.length && r < nums2.length) {
+        if (nums1[l] === nums2[r]) {
+          ans.push(nums1[l]);
+          l++;
+          r++;
+        } else nums1[l] < nums2[r] ? l++ : r++;
+      }
+      return ans;
+    };
+    console.log(intersect([4, 5, 9, 9], [4, 4, 8, 8, 8, 9, 9,]));
+  </script>
+</body>
+
+</html>

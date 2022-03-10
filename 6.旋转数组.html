@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+
+    // var rotate = function (nums, k) {
+    const n = nums.length;
+    // 创建一个新的数组
+    // const newArr = new Array(n);
+    // for (let i = 0; i < n; ++i) {
+    // newArr[(i + k) % n] = nums[i];
+    // }
+    // for (let i = 0; i < n; ++i) {
+    //   nums[i] = newArr[i];
+    // }
+    // return newArr
+    // };
+
+    const gcd = (x, y) => y ? gcd(y, x % y) : x;
+
+    var rotate = function (nums, k) {
+      const n = nums.length;
+      k = k % n;
+      let count = gcd(k, n);
+      for (let start = 0; start < count; ++start) {
+        let current = start;
+        let prev = nums[start];
+        do {
+          const next = (current + k) % n;
+          const temp = nums[next];
+          nums[next] = prev;
+          prev = temp;
+          current = next;
+        } while (start !== current);
+      }
+      return nums
+    }; 0 + 3 % 9
+    console.log(rotate([1, 2, 3, 4, 5, 6, 7, 8, 9, 10], 3));
+  </script>
+</body>
+
+</html>
