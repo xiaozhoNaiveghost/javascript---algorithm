@@ -11,20 +11,33 @@
 <body>
   <script>
     var twoSum = function (nums, target) {
-      let arr = []
-      for (let i = 0; i < nums.length; ++i) {
-        let j = i + 1
-        for (j; j < nums.length; ++j) {
-          // console.log(j);
-          if (nums[i] + nums[j] == target) {
-            arr.push(i, j)
-            ++i
+      //解法1
+      // let arr = []
+      // for (let i = 0; i < nums.length; ++i) {
+      //   let j = i + 1
+      //   for (j; j < nums.length; ++j) {
+      //     // console.log(j);
+      //     if (nums[i] + nums[j] == target) {
+      //       arr.push(i, j)
+      //       ++i
+      //     }
+      //   }
+      // }
+      // return arr
+      // 解法2 
+      // target - nums[i] = num 然后用 num 对原数组对比
+      let n = nums.length, arr = new Array(), s = new Array()
+      for (let i = 0; i < n; i++) {
+        let num = target - nums[i] //7
+        for (let j = i; j < n; j++) {
+          if (num == nums[j + 1]) {
+            arr.push(i, j + 1)
+            return arr
           }
         }
-      }
-      return arr
-    };
-    console.log(twoSum([3, 2, 3], 6));
+      };
+    }
+    console.log(twoSum([2, 7, 8, 11, 15], 9));
   </script>
 </body>
 
